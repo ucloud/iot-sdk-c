@@ -1,0 +1,11 @@
+link_libraries(iot_sdk iot_platform)
+
+if (ENABLE_FEATURE_MQTT_COMM)
+    add_executable(mqtt_sample mqtt/mqtt_sample.c)
+    add_dependencies(mqtt_sample iot_sdk iot_platform)
+endif ()
+
+if (ENABLE_FEATURE_AUTH_MODE_DYNAMIC)
+    add_executable(dynamic_auth_sample dynamic_auth/dynamic_auth_sample.c)
+    add_dependencies(dynamic_auth_sample iot_sdk iot_platform)
+endif ()

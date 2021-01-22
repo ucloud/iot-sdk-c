@@ -1,0 +1,22 @@
+BUILD_TYPE                      = release           #release/debug; debug模式额外打开DEBUG日志以及函数追踪
+ENABLE_MAKEFILE_DEBUG           = n                 #是否打开Makefile调试
+
+PLATFORM_CC                     = gcc
+PLATFORM_AR                     = ar
+PLATFORM_OS                     = linux
+PLATFORM_SSL                    = mbedtls
+PLATFORM_MODULE                 = m26
+
+# Uncomment below and specify PATH to your toolchain when cross-compile SDK
+#
+# PLATFORM_CC                   = /home/shock/openwrt/packages/toolchain/mipsel-linux-gcc
+# PLATFORM_AR                   = /home/shock/openwrt/packages/toolchain/mipsel-linux-ar
+# PLATFORM_CC                   = armcc
+# PLATFORM_AR                   = armar
+
+FEATURE_MQTT_COMM_ENABLED               = y     # 是否打开MQTT连接云平台
+FEATURE_AUTH_MODE_DYNAMIC               = y     # 是否打开设备动态注册
+FEATURE_SUPPORT_TLS                     = y     # 是否打开TLS支持
+FEATURE_SUPPORT_AT_CMD                  = n     # 是否打开AT命令支持
+
+FEATURE_SDK_TESTS_ENABLED               = n     # 是否打开SDK测试用例编译
