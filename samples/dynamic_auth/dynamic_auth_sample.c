@@ -21,14 +21,14 @@
 #include "uiot_import.h"
 #include "lite-utils.h"
 /* 产品序列号, 与云端同步设备状态时需要  */
-#define UIOT_MY_PRODUCT_SN            "PRODUCT_SN"
+#define IOT_MY_PRODUCT_SN            "PRODUCT_SN"
 /* 
     设备序列号, 与云端同步设备状态时需要, 静态认证后的设备不能进行动态认证，
     因此每次执行该用例需要新建一个设备。
 */
-#define UIOT_MY_DEVICE_SN             "DEVICE_SN"
+#define IOT_MY_DEVICE_SN             "DEVICE_SN"
 
-#define UIOT_MY_PRODUCT_SECRET        "PRODUCT_SECRET"
+#define IOT_MY_PRODUCT_SECRET        "PRODUCT_SECRET"
 
 #define MAX_SIZE_OF_TOPIC_CONTENT 100
 MQTTInitParams init_params = DEFAULT_MQTT_INIT_PARAMS;
@@ -50,7 +50,7 @@ static int _publish_msg(void *client)
 {
     char topicName[128] = {0};
     int num = 18;
-    HAL_Snprintf(topicName, 128, "/%s/%s/upload", UIOT_MY_PRODUCT_SN, UIOT_MY_DEVICE_SN);
+    HAL_Snprintf(topicName, 128, "/%s/%s/upload", IOT_MY_PRODUCT_SN, IOT_MY_DEVICE_SN);
 
     PublishParams pub_params = DEFAULT_PUB_PARAMS;
     
@@ -67,7 +67,7 @@ static int _publish_msg(void *client)
 static int _register_subscribe_topics(void *client)
 {
     static char topic_name[128] = {0};
-    HAL_Snprintf(topic_name, 128, "/%s/%s/set", UIOT_MY_PRODUCT_SN, UIOT_MY_DEVICE_SN);
+    HAL_Snprintf(topic_name, 128, "/%s/%s/set", IOT_MY_PRODUCT_SN, IOT_MY_DEVICE_SN);
 
     SubscribeParams sub_params = DEFAULT_SUB_PARAMS;
     sub_params.on_message_handler = on_message_callback;
@@ -83,9 +83,9 @@ static int _register_subscribe_topics(void *client)
  */
 static int _setup_connect_init_params(MQTTInitParams* initParams)
 {
-    initParams->device_sn = (char *)UIOT_MY_DEVICE_SN;
-    initParams->product_sn = (char *)UIOT_MY_PRODUCT_SN;
-    initParams->product_secret = (char *)UIOT_MY_PRODUCT_SECRET;
+    initParams->device_sn = (char *)IOT_MY_DEVICE_SN;
+    initParams->product_sn = (char *)IOT_MY_PRODUCT_SN;
+    initParams->product_secret = (char *)IOT_MY_PRODUCT_SECRET;
 
     initParams->command_timeout = UIOT_MQTT_COMMAND_TIMEOUT;
     initParams->keep_alive_interval = UIOT_MQTT_KEEP_ALIVE_INTERNAL;
