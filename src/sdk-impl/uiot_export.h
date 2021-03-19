@@ -55,7 +55,7 @@ extern "C" {
 #define ENABLE_INFINITE_RECONNECT                                    1
 
 /* MQTT连接域名 */
-#define UIOT_MQTT_DIRECT_DOMAIN                                      "106.75.236.204"
+#define UIOT_MQTT_DIRECT_DOMAIN                                      "stacktest.iot.ucloud.cn"
 
 
 #include "uiot_export_mqtt.h"
