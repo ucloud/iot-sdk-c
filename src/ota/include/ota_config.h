@@ -32,9 +32,9 @@ extern "C" {
 
 #define REPORT_VER_TEMPLATE       			"{\"Method\": \"report\", \"Payload\":{\"Module\":\"%s\", \"Version\":\"%s\"}}"
 #define REPORT_SUCCESS_MSG_TEMPLATE         "{\"Method\": \"success\", \"Payload\": {\"TaskID\": \"%s\"}}"
-#define REPORT_FAIL_MSG_TEMPLATE          	"{\"Method\": \"fail\", \"Payload\": {\"TaskID\": %d, \"ErrMsg\":\"%s\"}}"
-#define NOTIFY_MSG_TEMPLATE     			"{\"Method\": \"notify\", \"Payload\":{\"TaskID\":%d}}"
-#define UPGRADING_MSG_TEMPLATE   			"{\"Method\": \"upgrading\", \"Payload\":{\"TaskID\":%d}}"
+#define REPORT_FAIL_MSG_TEMPLATE          	"{\"Method\": \"fail\", \"Payload\": {\"TaskID\": \"%s\", \"ErrMsg\":\"%s\"}}"
+#define NOTIFY_MSG_TEMPLATE     			"{\"Method\": \"notify\", \"Payload\":{\"TaskID\":\"%s\"}}"
+#define UPGRADING_MSG_TEMPLATE   			"{\"Method\": \"upgrading\", \"Payload\":{\"TaskID\":\"%s\"}}"
 
 #define OTA_UPSTREAM_MSG_BUF_LEN    (129)
 #define OTA_TOPIC_BUF_LEN           (129)

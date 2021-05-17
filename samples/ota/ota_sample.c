@@ -23,11 +23,11 @@
 #include "uiot_import.h"
 #include "uiot_export_ota.h"
 
-#define UIOT_MY_PRODUCT_SN            "productSN"
+#define UIOT_MY_PRODUCT_SN            "PRODUCT_SN"
 
-#define UIOT_MY_DEVICE_SN             "deviceSN"
+#define UIOT_MY_DEVICE_SN             "DEVICE_SN"
 
-#define UIOT_MY_DEVICE_SECRET         "device_secret"
+#define UIOT_MY_DEVICE_SECRET         "DEVICE_SECRET"
 
 #define OTA_BUF_LEN (1024)
 
@@ -113,7 +113,11 @@ int main(int argc, char **argv)
         LOG_ERROR("init OTA failed");
         return FAILURE_RET;
     }
-	
+
+    //report current version
+    IOT_OTA_ReportVersion(h_ota, "default", "1.0.0");
+
+
     while(1)
     {
         IOT_MQTT_Yield(client, 5000);
