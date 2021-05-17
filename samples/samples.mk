@@ -23,6 +23,15 @@ dynamic_auth_sample:
 	mv $@ $(FINAL_DIR)/bin
 endif
 
+ifneq (,$(filter -DOTA_ENABLED,$(CFLAGS)))
+ota_sample:
+	$(TOP_Q) \
+	$(PLATFORM_CC) $(CFLAGS) $(SAMPLE_DIR)/ota/$@.c $(LDFLAGS) -o $@
+
+	$(TOP_Q) \
+	mv $@ $(FINAL_DIR)/bin
+endif
+
 samples_final:
 	$(TOP_Q) \
 	cp -rf $(TOP_DIR)/src/sdk-impl/*port*.h $(FINAL_DIR)/include/

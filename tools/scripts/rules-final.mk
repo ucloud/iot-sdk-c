@@ -16,6 +16,6 @@ endif
 	$(TOP_Q) \
 	rm -rf ${TEMP_DIR}
 	
-.PHONY: mqtt_sample dynamic_auth_sample
+.PHONY: mqtt_sample dynamic_auth_sample ota_sample
 	
-final : mqtt_sample dynamic_auth_sample
+final : mqtt_sample dynamic_auth_sample ota_sample

@@ -25,7 +25,7 @@ static int _utils_parse_name(const char *url, char *name) {
     }
     host_ptr += 3;
 
-    path_ptr = strchr(host_ptr, '/');
+    path_ptr = strrchr(host_ptr, '/');
     if (NULL == path_ptr) {
         return -2;
     }
@@ -39,6 +39,7 @@ static int _utils_parse_name(const char *url, char *name) {
 
     memcpy(name, path_ptr + 1, name_len - 1);
     name[name_len] = '\0';
+	LOG_ERROR("file name:%s",name);
 
     return SUCCESS_RET;
 }

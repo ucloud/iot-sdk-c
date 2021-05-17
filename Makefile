@@ -11,6 +11,7 @@ COMP_LIB_COMPONENTS := \
 
 $(call CompLib_Map, MQTT_COMM_ENABLED, src/mqtt/src)
 
+$(call CompLib_Map, OTA_ENABLED, src/ota/src)
 $(call CompLib_Map, SUPPORT_AT_CMD, src/at/src src/at/class/$(PLATFORM_MODULE) platform/module)
 IOTSDK_SRC_FILES := \
 
@@ -53,6 +54,9 @@ $(call CompInc_Map, MQTT_COMM_ENABLED, \
     src/mqtt/include \
 )
 
+$(call CompInc_Map, OTA_ENABLED, \
+	src/ota/include \
+)
 $(call CompInc_Map, SUPPORT_TLS, \
 	external_libs/mbedtls/include \
 )

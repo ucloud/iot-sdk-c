@@ -20,6 +20,7 @@ extern "C" {
 #include <string.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "uiot_defs.h"
 #include "utils_httpc.h"
@@ -33,17 +34,20 @@ extern "C" {
 #define HTTP_CLIENT_READ_BUF_SIZE     (1024)          /* read payload */
 #define HTTP_CLIENT_READ_HEAD_SIZE    (32)            /* read header */
 #define HTTP_CLIENT_SEND_BUF_SIZE     (1024)          /* send */
-#define HTTP_CLIENT_REQUEST_BUF_SIZE  (300)           /* send */
-#define HTTP_CLIENT_MAX_URL_LEN       (256)
+#define HTTP_CLIENT_REQUEST_BUF_SIZE  (1024)           /* send */
+#define HTTP_CLIENT_MAX_URL_LEN       (512)
 #define HTTP_RETRIEVE_MORE_DATA       (1)             /**< More data needs to be retrieved. */
 #define HTTP_CLIENT_CHUNK_SIZE        (1024)
-static int _utils_parse_url(const char *url, char *host, char *path) {
+static int _utils_parse_url(const char *url, char *host, char *path, int *port) {
     char *host_ptr = (char *) strstr(url, "://");
     uint32_t host_len = 0;
     uint32_t path_len;
+	uint32_t port_len;
     /* char *port_ptr; */
     char *path_ptr;
     char *fragment_ptr;
+	char port_str[HTTP_CLIENT_MAX_URL_LEN] = {0};
+	char *port_ptr;
 
     if (host_ptr == NULL) {
         return ERR_PARAM_INVALID; /* URL is invalid */
@@ -69,6 +73,17 @@ static int _utils_parse_url(const char *url, char *host, char *path) {
     memcpy(path, path_ptr, path_len);
     path[path_len] = '\0';
 
+	port_ptr = strchr(host, ':');
+    if (NULL == port_ptr) {
+        return SUCCESS_RET;
+    }else{
+		port_len = port_ptr - host;
+	    memcpy(port_str, port_ptr+1, strlen(port_ptr)-1);
+	    port_str[strlen(port_ptr)-1] = '\0';
+		if(port_str != NULL)
+			*port = atoi(port_str);
+	    host[port_len] = '\0';
+	}
     return SUCCESS_RET;
 }
 
@@ -355,7 +370,7 @@ static int _http_parse_response_header(http_client_t *client, char *data, int le
         client_data->response_content_len = atoi(tmp_ptr + strlen("Content-Length: "));
         client_data->retrieve_len = client_data->response_content_len;
     } else {
-        LOG_ERROR("Could not parse header");
+        LOG_ERROR("Could not parse header data:%s",data);
         return ERR_HTTP_CONN_ERROR;
     }
 
@@ -405,8 +420,9 @@ int _http_send_request(http_client_t *client, const char *url, HTTP_Request_Meth
     int rc;
     char host[HTTP_CLIENT_MAX_URL_LEN] = {0};
     char path[HTTP_CLIENT_MAX_URL_LEN] = {0};
+	int port;
 
-    rc = _utils_parse_url(url, host, path);
+    rc = _utils_parse_url(url, host, path, &port);
     if (rc != SUCCESS_RET) {
         return rc;
     }
@@ -456,17 +472,18 @@ static int _http_client_recv_response(http_client_t *client, uint32_t timeout_ms
     return ret;
 }
 
-int http_client_connect(http_client_t *client, const char *url, int port, const char *ca_crt) {
+int http_client_connect(http_client_t *client, const char *url, const char *ca_crt) {
     if (client->net.handle != 0) {
         LOG_ERROR("http client has connected to host!");
         return ERR_HTTP_CONN_ERROR;
     }
 
     int rc;
+	int port;
     char host[HTTP_CLIENT_MAX_URL_LEN] = {0};
     char path[HTTP_CLIENT_MAX_URL_LEN] = {0};
 
-    rc = _utils_parse_url(url, host, path);
+    rc = _utils_parse_url(url, host, path, &port);
     if (rc != SUCCESS_RET) {
         return rc;
     }
@@ -484,27 +501,6 @@ int http_client_connect(http_client_t *client, const char *url, int port, const 
         LOG_DEBUG("http client connect success");
     }
     return rc;
-}
-
-int http_client_common(http_client_t *client, const char *url, int port, const char *ca_crt,
-                       HTTP_Request_Method method, http_client_data_t *client_data, uint32_t timeout_ms) {
-    int rc;
-
-    if (client->net.handle == 0) {
-        rc = http_client_connect(client, url, port, ca_crt);
-        if (rc != SUCCESS_RET) {
-            return rc;
-        }
-    }
-
-    rc = _http_send_request(client, url, method, 0, 0, client_data, timeout_ms);
-    if (rc != SUCCESS_RET) {
-        LOG_ERROR("http_send_request error, rc = %d", rc);
-        http_client_close(client);
-        return rc;
-    }
-
-    return SUCCESS_RET;
 }
 
 int http_client_recv_data(http_client_t *client, uint32_t timeout_ms, http_client_data_t *client_data) {

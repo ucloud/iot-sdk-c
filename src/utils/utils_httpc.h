@@ -57,10 +57,7 @@ typedef struct {
 } http_client_data_t;
 
 
-int http_client_connect(http_client_t *client, const char *url, int port, const char *ca_crt);
-
-int http_client_common(http_client_t *client, const char *url, int port, const char *ca_crt,
-                       HTTP_Request_Method method, http_client_data_t *client_data, uint32_t timeout_ms);
+int http_client_connect(http_client_t *client, const char *url, const char *ca_crt);
 
 int http_client_recv_data(http_client_t *client, uint32_t timeout_ms, http_client_data_t *client_data);
 

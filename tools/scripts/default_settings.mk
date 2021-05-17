@@ -4,6 +4,7 @@ PLATFORM_OS            ?= linux
 PLATFORM_MODULE        ?= esp8266
 
 FEATURE_MQTT_COMM_ENABLED           ?= y
+FEATURE_OTA_ENABLED                 ?= n
 FEATURE_AUTH_MODE_DYNAMIC           ?= n
 FEATURE_SUPPORT_TLS                 ?= n
 FEATURE_SUPPORT_AT_CMD              ?= n
