@@ -582,7 +582,7 @@ static int _read_mqtt_packet(UIoT_Client *pClient, Timer *timer, uint8_t *packet
     if (timer_left_ms <= 0) {
         timer_left_ms = 1;
     }
-    timer_left_ms += UIOT_MQTT_MAX_REMAIN_WAIT_MS; //确保一包MQTT报文接收完
+    timer_left_ms += IOT_MQTT_MAX_REMAIN_WAIT_MS; //确保一包MQTT报文接收完
     
     ret = _decode_packet_rem_len_with_net_read(pClient, &rem_len, timer_left_ms);
     if (SUCCESS_RET != ret) {
@@ -598,7 +598,7 @@ static int _read_mqtt_packet(UIoT_Client *pClient, Timer *timer, uint8_t *packet
         if (timer_left_ms <= 0) {
             timer_left_ms = 1;
         }
-        timer_left_ms += UIOT_MQTT_MAX_REMAIN_WAIT_MS;
+        timer_left_ms += IOT_MQTT_MAX_REMAIN_WAIT_MS;
 
         bytes_to_be_read = pClient->read_buf_size;
         do {
@@ -627,7 +627,7 @@ static int _read_mqtt_packet(UIoT_Client *pClient, Timer *timer, uint8_t *packet
         if (timer_left_ms <= 0) {
             timer_left_ms = 1;
         }
-        timer_left_ms += UIOT_MQTT_MAX_REMAIN_WAIT_MS;
+        timer_left_ms += IOT_MQTT_MAX_REMAIN_WAIT_MS;
     
         pClient->network_stack.read(&(pClient->network_stack), pClient->read_buf, rem_len, timer_left_ms);
         return ERR_MQTT_BUFFER_TOO_SHORT;
@@ -638,7 +638,7 @@ static int _read_mqtt_packet(UIoT_Client *pClient, Timer *timer, uint8_t *packet
             if (timer_left_ms <= 0) {
                 timer_left_ms = 1;
             }
-            timer_left_ms += UIOT_MQTT_MAX_REMAIN_WAIT_MS;
+            timer_left_ms += IOT_MQTT_MAX_REMAIN_WAIT_MS;
             read_len = pClient->network_stack.read(&(pClient->network_stack), pClient->read_buf + len, rem_len, timer_left_ms);
             if (read_len < 0) {
                 return read_len;

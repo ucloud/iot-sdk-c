@@ -35,8 +35,8 @@ static int _read_string_with_len(char **string, uint16_t *stringLen, unsigned ch
     if (enddata - (*pptr) > 1) {
         *stringLen = mqtt_read_uint16_t(pptr); /* increments pptr to point past length */
         
-        if(*stringLen > UIOT_MQTT_RX_BUF_LEN){
-            LOG_ERROR("stringLen exceed UIOT_MQTT_RX_BUF_LEN");
+        if(*stringLen > IOT_MQTT_RX_BUF_LEN){
+            LOG_ERROR("stringLen exceed IOT_MQTT_RX_BUF_LEN");
             return FAILURE_RET;
         }
         

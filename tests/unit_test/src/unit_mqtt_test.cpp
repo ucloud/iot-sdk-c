@@ -123,7 +123,7 @@ static int _publish_msg(void *client)
 {
     char topicName[128] = {0};
     int num = 18;
-    HAL_Snprintf(topicName, 128, "/%s/%s/upload/event", UIOT_MY_PRODUCT_SN, UIOT_MY_DEVICE_SN);
+    HAL_Snprintf(topicName, 128, "/%s/%s/upload/event", IOT_MY_PRODUCT_SN, IOT_MY_DEVICE_SN);
 
     PublishParams pub_params = DEFAULT_PUB_PARAMS;
     
@@ -141,7 +141,7 @@ static int _register_subscribe_topics(void *client)
 {
     static char topic_name[128] = {0};
     //说明:此处订阅的topic是一个可订阅可发布的，需要在控制台上新建
-    HAL_Snprintf(topic_name, 128, "/%s/%s/upload/event", UIOT_MY_PRODUCT_SN, UIOT_MY_DEVICE_SN);
+    HAL_Snprintf(topic_name, 128, "/%s/%s/upload/event", IOT_MY_PRODUCT_SN, IOT_MY_DEVICE_SN);
 
     SubscribeParams sub_params = DEFAULT_SUB_PARAMS;
     sub_params.on_message_handler = on_message_callback;
@@ -151,7 +151,7 @@ static int _register_subscribe_topics(void *client)
 static int _register_unsubscribe_topics(void *client)
 {
     static char topic_name[128] = {0};
-    HAL_Snprintf(topic_name, 128, "/%s/%s/upload/event", UIOT_MY_PRODUCT_SN, UIOT_MY_DEVICE_SN);
+    HAL_Snprintf(topic_name, 128, "/%s/%s/upload/event", IOT_MY_PRODUCT_SN, IOT_MY_DEVICE_SN);
 
     return IOT_MQTT_Unsubscribe(client, topic_name);
 }
@@ -159,12 +159,12 @@ static int _register_unsubscribe_topics(void *client)
 static int _setup_connect_init_params(MQTTInitParams* initParams)
 {
     int ret = 0;
-    initParams->device_sn = (char *)UIOT_MY_DEVICE_SN;
-    initParams->product_sn = (char *)UIOT_MY_PRODUCT_SN;
-    initParams->device_secret = (char *)UIOT_MY_DEVICE_SECRET;
+    initParams->device_sn = (char *)IOT_MY_DEVICE_SN;
+    initParams->product_sn = (char *)IOT_MY_PRODUCT_SN;
+    initParams->device_secret = (char *)IOT_MY_DEVICE_SECRET;
 
-    initParams->command_timeout = UIOT_MQTT_COMMAND_TIMEOUT;
-    initParams->keep_alive_interval = UIOT_MQTT_KEEP_ALIVE_INTERNAL;
+    initParams->command_timeout = IOT_MQTT_COMMAND_TIMEOUT;
+    initParams->keep_alive_interval = IOT_MQTT_KEEP_ALIVE_INTERNAL;
     initParams->auto_connect_enable = 1;
     initParams->event_handler.h_fp = event_handler;
     initParams->event_handler.context = NULL;

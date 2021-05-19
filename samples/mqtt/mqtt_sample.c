@@ -134,8 +134,8 @@ static int _setup_connect_init_params(MQTTInitParams* initParams)
     initParams->product_sn = IOT_MY_PRODUCT_SN;
     initParams->device_secret = IOT_MY_DEVICE_SECRET;
 
-    initParams->command_timeout = UIOT_MQTT_COMMAND_TIMEOUT;
-    initParams->keep_alive_interval = UIOT_MQTT_KEEP_ALIVE_INTERNAL;
+    initParams->command_timeout = IOT_MQTT_COMMAND_TIMEOUT;
+    initParams->keep_alive_interval = IOT_MQTT_KEEP_ALIVE_INTERNAL;
 
     initParams->auto_connect_enable = 1;
     initParams->event_handler.h_fp = event_handler;
