@@ -24,11 +24,11 @@
 #include "lite-utils.h"
 
 /* 产品序列号, 与云端同步设备状态时需要  */
-#define UIOT_MY_PRODUCT_SN            "PRODUCT_SN"
+#define IOT_MY_PRODUCT_SN            "PRODUCT_SN"
 /* 设备序列号, 与云端同步设备状态时需要 */
-#define UIOT_MY_DEVICE_SN             "DEVICE_SN"
+#define IOT_MY_DEVICE_SN             "DEVICE_SN"
 
-#define UIOT_MY_PRODUCT_SECRET        "PRODUCT_SECRET"
+#define IOT_MY_PRODUCT_SECRET        "PRODUCT_SECRET"
 
 #define MAX_SIZE_OF_TOPIC_CONTENT 100
 MQTTInitParams init_params = DEFAULT_MQTT_INIT_PARAMS;
@@ -100,7 +100,7 @@ static int _setup_connect_init_params(MQTTInitParams* initParams)
 {
     initParams->device_sn = (char *)IOT_MY_DEVICE_SN;
     initParams->product_sn = (char *)IOT_MY_PRODUCT_SN;
-    initParams->product_secret = (char *)UIOT_MY_PRODUCT_SECRET;
+    initParams->product_secret = (char *)IOT_MY_PRODUCT_SECRET;
 
     initParams->command_timeout = IOT_MQTT_COMMAND_TIMEOUT;    
     initParams->keep_alive_interval = IOT_MQTT_KEEP_ALIVE_INTERNAL;

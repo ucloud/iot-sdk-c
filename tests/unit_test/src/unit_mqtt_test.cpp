@@ -23,11 +23,11 @@
 #include "uiot_export.h"
 #include "uiot_import.h"
 
-#define UIOT_MY_PRODUCT_SN            "PRODUCT_SN"
+#define IOT_MY_PRODUCT_SN            "PRODUCT_SN"
 
-#define UIOT_MY_DEVICE_SN             "DEVICE_SN"
+#define IOT_MY_DEVICE_SN             "DEVICE_SN"
 
-#define UIOT_MY_DEVICE_SECRET         "DEVICE_SECRET"
+#define IOT_MY_DEVICE_SECRET         "DEVICE_SECRET"
 
 #define MAX_SIZE_OF_TOPIC_CONTENT 100
 
