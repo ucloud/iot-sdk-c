@@ -23,11 +23,11 @@
 #include "uiot_import.h"
 #include "uiot_export_ota.h"
 
-#define UIOT_MY_PRODUCT_SN            "PRODUCT_SN"
+#define IOT_MY_PRODUCT_SN            "PRODUCT_SN"
 
-#define UIOT_MY_DEVICE_SN             "DEVICE_SN"
+#define IOT_MY_DEVICE_SN             "DEVICE_SN"
 
-#define UIOT_MY_DEVICE_SECRET         "DEVICE_SECRET"
+#define IOT_MY_DEVICE_SECRET         "DEVICE_SECRET"
 
 #define OTA_BUF_LEN (1024)
 
@@ -78,11 +78,11 @@ static void event_handler(void *pClient, void *handle_context, MQTTEventMsg *msg
 
 static int _setup_connect_init_params(MQTTInitParams* initParams)
 {
-    initParams->device_sn = UIOT_MY_DEVICE_SN;
-    initParams->product_sn = UIOT_MY_PRODUCT_SN;
-    initParams->device_secret = UIOT_MY_DEVICE_SECRET;
-    initParams->command_timeout = UIOT_MQTT_COMMAND_TIMEOUT;    
-    initParams->keep_alive_interval = UIOT_MQTT_KEEP_ALIVE_INTERNAL;
+    initParams->device_sn = IOT_MY_DEVICE_SN;
+    initParams->product_sn = IOT_MY_PRODUCT_SN;
+    initParams->device_secret = IOT_MY_DEVICE_SECRET;
+    initParams->command_timeout = IOT_MQTT_COMMAND_TIMEOUT;    
+    initParams->keep_alive_interval = IOT_MQTT_KEEP_ALIVE_INTERNAL;
     initParams->auto_connect_enable = 1;
     initParams->event_handler.h_fp = event_handler;
 
@@ -107,7 +107,7 @@ int main(int argc, char **argv)
         return FAILURE_RET;
     }
 
-    void *h_ota = IOT_OTA_Init(UIOT_MY_PRODUCT_SN, UIOT_MY_DEVICE_SN, client);
+    void *h_ota = IOT_OTA_Init(IOT_MY_PRODUCT_SN, IOT_MY_DEVICE_SN, client);
     if (NULL == h_ota) {
         IOT_MQTT_Destroy(&client);
         LOG_ERROR("init OTA failed");

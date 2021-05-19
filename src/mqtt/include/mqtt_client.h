@@ -182,8 +182,8 @@ typedef struct Client {
 
     size_t                   write_buf_size;                                // 消息发送buffer长度
     size_t                   read_buf_size;                                 // 消息接收buffer长度
-    unsigned char            write_buf[UIOT_MQTT_TX_BUF_LEN];               // MQTT消息发送buffer
-    unsigned char            read_buf[UIOT_MQTT_RX_BUF_LEN];                // MQTT消息接收buffer
+    unsigned char            write_buf[IOT_MQTT_TX_BUF_LEN];                // MQTT消息发送buffer
+    unsigned char            read_buf[IOT_MQTT_RX_BUF_LEN];                 // MQTT消息接收buffer
 
     void                     *lock_generic;                                 // client原子锁
     void                     *lock_write_buf;                               // 输出流的锁

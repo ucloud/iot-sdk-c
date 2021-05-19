@@ -349,8 +349,8 @@ int IOT_MQTT_Dynamic_Register(MQTTInitParams *pParams)
     ret = IOT_MQTT_Yield(client,200);
 
     /* 向topic发送消息请求回复设备密钥 */
-    char auth_msg[UIOT_MQTT_TX_BUF_LEN];
-    HAL_Snprintf(auth_msg, UIOT_MQTT_TX_BUF_LEN, "{\"RequestID\":\"%d\"}", 1);
+    char auth_msg[IOT_MQTT_TX_BUF_LEN];
+    HAL_Snprintf(auth_msg, IOT_MQTT_TX_BUF_LEN, "{\"RequestID\":\"%d\"}", 1);
     PublishParams pub_params = DEFAULT_PUB_PARAMS;
 
     pub_params.qos = QOS1;
@@ -387,7 +387,7 @@ int uiot_mqtt_init(UIoT_Client *pClient, MQTTInitParams *pParams) {
 
     memset(pClient, 0x0, sizeof(UIoT_Client));
 
-    int size = HAL_Snprintf(s_uiot_host, HOST_STR_LENGTH, "%s", UIOT_MQTT_DIRECT_DOMAIN);
+    int size = HAL_Snprintf(s_uiot_host, HOST_STR_LENGTH, "%s", IOT_MQTT_DIRECT_DOMAIN);
     if (size < 0 || size > HOST_STR_LENGTH - 1) {
         return FAILURE_RET;
     }
@@ -400,8 +400,8 @@ int uiot_mqtt_init(UIoT_Client *pClient, MQTTInitParams *pParams) {
 
     // packet id 初始化时取1
     pClient->next_packet_id = 1;
-    pClient->write_buf_size = UIOT_MQTT_TX_BUF_LEN;
-    pClient->read_buf_size = UIOT_MQTT_RX_BUF_LEN;
+    pClient->write_buf_size = IOT_MQTT_TX_BUF_LEN;
+    pClient->read_buf_size = IOT_MQTT_RX_BUF_LEN;
     
     pClient->event_handler = pParams->event_handler;
 

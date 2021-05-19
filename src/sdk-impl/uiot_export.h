@@ -21,13 +21,13 @@ extern "C" {
 #endif
 
 /* MQTT心跳消息发送周期, 单位:s */
-#define UIOT_MQTT_KEEP_ALIVE_INTERNAL                               (240)
+#define IOT_MQTT_KEEP_ALIVE_INTERNAL                               (240)
 
 /* MQTT 阻塞调用(包括连接, 订阅, 发布等)的超时时间 */
-#define UIOT_MQTT_COMMAND_TIMEOUT                                   (5 * 1000)
+#define IOT_MQTT_COMMAND_TIMEOUT                                   (5 * 1000)
 
 /* 接收到 MQTT 包头以后，接收剩余长度及剩余包，最大延迟等待时延 */
-#define UIOT_MQTT_MAX_REMAIN_WAIT_MS                                (2000)
+#define IOT_MQTT_MAX_REMAIN_WAIT_MS                                (2000)
 
 /* 产品序列号的最大长度 */
 #define MAX_SIZE_OF_PRODUCT_SN                                      (16)
@@ -42,10 +42,10 @@ extern "C" {
 #define MAX_SIZE_OF_DEVICE_SECRET                                   (16)
 
 /* MQTT消息发送buffer大小, 支持最大256*1024 */
-#define UIOT_MQTT_TX_BUF_LEN                                        (2048)
+#define IOT_MQTT_TX_BUF_LEN                                        (2048)
 
 /* MQTT消息接收buffer大小, 支持最大256*1024 */
-#define UIOT_MQTT_RX_BUF_LEN                                        (2048)
+#define IOT_MQTT_RX_BUF_LEN                                        (2048)
 
 /* 重连最大等待时间 */
 #define MAX_RECONNECT_WAIT_INTERVAL                                 (60 * 1000)
@@ -55,7 +55,7 @@ extern "C" {
 #define ENABLE_INFINITE_RECONNECT                                    1
 
 /* MQTT连接域名 */
-#define UIOT_MQTT_DIRECT_DOMAIN                                      "stacktest.iot.ucloud.cn"
+#define IOT_MQTT_DIRECT_DOMAIN                                      "stacktest.iot.ucloud.cn"
 
 
 #include "uiot_export_mqtt.h"
