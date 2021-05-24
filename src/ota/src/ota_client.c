@@ -282,7 +282,6 @@ int IOT_OTA_Destroy(void *handle)
     }
 
     osc_deinit(h_ota->ch_signal);    
-    ofc_deinit(h_ota->ch_fetch);
     ota_lib_md5_deinit(h_ota->md5);
 
     if (NULL != h_ota->url) {
@@ -303,6 +302,14 @@ int IOT_OTA_Destroy(void *handle)
 
     if (NULL != h_ota->download_name) {
         HAL_Free(h_ota->download_name);
+    }
+
+    if (NULL != h_ota->current_version) {
+        HAL_Free(h_ota->current_version);
+    }
+
+    if (NULL != h_ota->taskID) {
+        HAL_Free(h_ota->taskID);
     }
 
     HAL_Free(h_ota);
